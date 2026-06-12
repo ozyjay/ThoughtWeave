@@ -1,0 +1,32 @@
+{
+  "name": "thoughtweave",
+  "version": "0.1.0",
+  "private": true,
+  "description": "ThoughtWeave - adaptive interfaces for deep conversations.",
+  "main": "dist-electron/main.js",
+  "scripts": {
+    "dev": "concurrently -k \"vite --host 127.0.0.1\" \"wait-on tcp:5173 && npm run electron:dev\"",
+    "electron:dev": "tsc -p tsconfig.electron.json && VITE_DEV_SERVER_URL=http://127.0.0.1:5173 electron dist-electron/main.js",
+    "compile": "tsc --noEmit && tsc -p tsconfig.electron.json --noEmit",
+    "build": "tsc --noEmit && tsc -p tsconfig.electron.json && vite build",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@vitejs/plugin-react": "^5.1.1",
+    "vite": "^7.2.7",
+    "react": "^19.2.1",
+    "react-dom": "^19.2.1"
+  },
+  "devDependencies": {
+    "@testing-library/react": "^16.3.1",
+    "@types/node": "^24.10.2",
+    "@types/react": "^19.2.7",
+    "@types/react-dom": "^19.2.3",
+    "concurrently": "^9.2.1",
+    "electron": "^39.2.7",
+    "jsdom": "^27.2.0",
+    "typescript": "^5.9.3",
+    "vitest": "^4.0.15",
+    "wait-on": "^9.0.3"
+  }
+}
