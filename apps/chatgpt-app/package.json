@@ -1,0 +1,33 @@
+{
+  "name": "@thoughtweave/chatgpt-app",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "ThoughtWeave ChatGPT App built with the Apps SDK.",
+  "scripts": {
+    "dev": "vite --host 127.0.0.1",
+    "server": "tsx server/src/index.ts",
+    "build": "tsc -p tsconfig.json && vite build",
+    "test": "vitest run",
+    "inspect": "npx @modelcontextprotocol/inspector@latest --server-url http://localhost:8787/mcp --transport http"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/ext-apps": "^1.7.4",
+    "@modelcontextprotocol/sdk": "^1.29.0",
+    "express": "^5.2.1",
+    "react": "^19.2.1",
+    "react-dom": "^19.2.1",
+    "zod": "^4.1.13"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^5.1.1",
+    "@types/express": "^5.0.6",
+    "@types/node": "^24.10.2",
+    "@types/react": "^19.2.7",
+    "@types/react-dom": "^19.2.3",
+    "tsx": "^4.21.0",
+    "typescript": "^5.9.3",
+    "vite": "^7.2.7",
+    "vitest": "^4.0.15"
+  }
+}

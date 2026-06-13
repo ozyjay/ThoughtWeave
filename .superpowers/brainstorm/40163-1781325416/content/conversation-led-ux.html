@@ -1,0 +1,64 @@
+<h2>Conversation-Led Adaptive UX</h2>
+<p class="subtitle">A first-pass framing of your revised vision: start quiet, then let the conversation justify extra UI.</p>
+
+<div class="section">
+  <div class="mockup">
+    <div class="mockup-header">Default State: Plain Conversation Surface</div>
+    <div class="mockup-body">
+      <div style="display:grid;grid-template-columns:1fr;gap:14px;">
+        <div class="placeholder" style="min-height:260px;display:flex;align-items:center;justify-content:center;">
+          WebKit ChatGPT view / primary conversation surface
+        </div>
+        <div style="display:flex;gap:10px;align-items:center;justify-content:center;color:#6b7280;font-size:14px;">
+          No panels by default · no rearranging without user control · conversation stays primary
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <h3>Adaptation Trigger Model</h3>
+  <div class="options" data-multiselect>
+    <div class="option" data-choice="parameters" onclick="toggleSelect(this)">
+      <div class="letter">1</div>
+      <div class="content">
+        <h3>Conversation Parameters</h3>
+        <p>Length, branch count, unresolved questions, reading position, pinned excerpts, current intent, task type, and evidence density become signals.</p>
+      </div>
+    </div>
+    <div class="option" data-choice="suggestion" onclick="toggleSelect(this)">
+      <div class="letter">2</div>
+      <div class="content">
+        <h3>Suggested Adaptation</h3>
+        <p>The app proposes a trusted layout or small companion panel, rather than silently changing the workspace.</p>
+      </div>
+    </div>
+    <div class="option" data-choice="apply" onclick="toggleSelect(this)">
+      <div class="letter">3</div>
+      <div class="content">
+        <h3>User Applies</h3>
+        <p>The user can preview, apply, dismiss, or revert. The main conversation remains anchored.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="split">
+  <div class="mockup">
+    <div class="mockup-header">Old MVP Framing</div>
+    <div class="mockup-body">
+      <div class="mock-sidebar">Conversation Map</div>
+      <div class="mock-content" style="margin-top:10px;">Research Review Layout appears immediately</div>
+      <div class="placeholder" style="margin-top:10px;min-height:80px;">Pinned Context + Reading Trail</div>
+    </div>
+  </div>
+  <div class="mockup">
+    <div class="mockup-header">Revised Product Framing</div>
+    <div class="mockup-body">
+      <div class="placeholder" style="min-height:90px;">Plain chat first</div>
+      <div class="mock-content" style="margin-top:10px;">Conversation parameters accumulate</div>
+      <div class="placeholder" style="margin-top:10px;min-height:80px;">Optional adaptive support appears only when useful</div>
+    </div>
+  </div>
+</div>

@@ -2,21 +2,23 @@
 
 # Project: ThoughtWeave
 
-ThoughtWeave is a standalone desktop app prototype exploring adaptive interfaces for deep conversations.
+ThoughtWeave is an Apps SDK prototype exploring adaptive companion interfaces for deep ChatGPT conversations.
 
 The core hypothesis is that long-form conversations develop structure over time, such as branches, themes, reading paths, open questions, evidence chains, exploratory threads, decision points, and unresolved tensions.
 
-Rather than forcing every conversation into a fixed linear chat interface, ThoughtWeave adapts the surrounding UX to the evolving structure of the conversation.
+Rather than forcing every conversation into a fixed linear chat interface, ThoughtWeave renders companion UX that helps the user hold onto the evolving structure of the conversation.
 
 The conversation is the primary object.
 
-The interface adapts to the conversation.
+ThoughtWeave adapts around the conversation.
 
 Before making changes, read:
 
 - `docs/thoughtweave-product-brief.md`
+- `apps/chatgpt-app/README.md` when touching the Apps SDK MVP
+- `docs/thoughtweave-chatgpt-webview-selection-policy.md` or its successor when touching ChatGPT page content, WebViews, selection handoff, or capture behaviour
 
-That document contains the product intent, UX scenario, architecture direction, data model, layout-spec model, MVP stages, and acceptance criteria.
+The product brief contains the current product intent, Apps SDK architecture direction, tool surface, UX model, MVP stages, and acceptance criteria.
 
 ---
 
@@ -26,9 +28,17 @@ Build this project as a **safe, bounded, extensible prototype**.
 
 ThoughtWeave explores promptable and adaptive conversation interfaces, but it must not generate or execute arbitrary UI code.
 
-A model or planner may eventually generate a **validated layout specification**.
+ChatGPT or a planner may eventually provide structured context or a validated UI/layout suggestion.
 
-The app should render only known, trusted components from a component registry.
+The app should render only known, trusted ThoughtWeave components and Apps SDK widget resources.
+
+The current primary MVP is a **ChatGPT App built with OpenAI Apps SDK**, located at:
+
+```text
+apps/chatgpt-app
+```
+
+The existing Electron app is a legacy/reference prototype. Do not delete or rewrite it unless explicitly asked.
 
 ---
 
@@ -53,44 +63,51 @@ Do not build:
 - arbitrary generated HTML UI
 - arbitrary generated JavaScript
 - unsupported ChatGPT DOM scraping
+- ChatGPT WebView DOM inspection
+- hidden transcript capture
+- prompt automation through the ChatGPT website
+- a replacement ChatGPT client
 - uncontrolled self-modifying interface behaviour
 - UI that rearranges itself without user control
 
 Prefer:
 
-- mock data first
+- Apps SDK / MCP tools first
 - TypeScript
-- standalone Electron desktop app
-- React renderer
-- trusted component registry
-- validated layout specs
-- user-triggered layout changes
-- preview/apply/revert for adaptive layouts
-- stable chat surface with adaptive surrounding UX
+- React widget UI rendered inside ChatGPT
+- narrowly scoped non-destructive tools
+- structured tool input/output
+- user/model-provided conversation context
+- additive companion panels/widgets
+- safe component rendering
+- explicit user-facing behaviour
+- no OpenAI API calls in the MCP server unless explicitly requested
 
 ---
 
 ## First MVP Goal
 
-Create a standalone desktop app prototype showing a polished mock **Research Review Layout** for ThoughtWeave.
+Create a private Developer Mode ChatGPT App prototype showing a polished **ThoughtWeave Reading Lens** companion widget.
 
-The first layout should include:
+The first Apps SDK MVP should include:
 
-- Conversation Map
-- Active Chat
+- MCP server exposing `/mcp`
+- `create_reading_lens` tool
+- `render_reading_lens` tool
+- React widget rendered in ChatGPT
+- Reading Lens
 - Pinned Context
-- Reading Trail
-- read/unread response sections
-- branch-from-selection affordance
-- resume-reading affordance
+- Open Questions
+- Suggested Panels
+- Next Actions
 
-Use mock data.
+Use user/model-provided conversation context.
 
-Do not integrate ChatGPT yet.
+Do not assume direct access to the full ChatGPT thread.
 
-Do not add model calls yet.
+Do not add OpenAI API calls yet.
 
-Do not scrape or embed third-party pages.
+Do not scrape, inspect, or embed ChatGPT pages.
 
 ---
 
@@ -110,8 +127,8 @@ When asked to build:
 
 1. Implement the smallest coherent slice.
 2. Keep the code clean and typed.
-3. Avoid backend complexity unless requested.
-4. Use mock data until the UX concept is working.
+3. Keep MCP tools narrow, typed, non-destructive, and idempotent where practical.
+4. Use structured tool data until deeper model/API behaviour is explicitly requested.
 5. Report files changed, how to run, what works, what is mocked, and the next useful step.
 
 ---
@@ -123,20 +140,22 @@ Use this prompt to begin planning:
 ```text
 Read AGENTS.md and docs/thoughtweave-product-brief.md, then inspect this repository.
 
-I want to build the first prototype of ThoughtWeave, a standalone desktop app for adaptive interfaces around deep, long-form AI conversations.
+I want to build the first Apps SDK prototype of ThoughtWeave, a ChatGPT App for adaptive companion interfaces around deep, long-form ChatGPT conversations.
 
 Do not implement yet.
 
-Please produce a staged plan for the first working prototype. The first prototype should open as a standalone desktop app showing a polished mock Research Review Layout with:
-- Conversation Map
-- Active Chat
+Please produce a staged plan for the first working prototype. The first prototype should run as a private ChatGPT Developer Mode app with:
+- MCP server exposing `/mcp`
+- `create_reading_lens`
+- `render_reading_lens`
+- React widget rendered inside ChatGPT
+- Reading Lens
 - Pinned Context
-- Reading Trail
-- read/unread response sections
-- branch-from-selection affordance
-- resume-reading affordance
+- Open Questions
+- Suggested Panels
+- Next Actions
 
-Focus on a small, safe, buildable implementation using mock data. Identify the files you would create or modify, the likely stack, risks, and the first acceptance tests.
+Focus on a small, safe, buildable implementation using structured tool input/output. Identify the files you would create or modify, the likely stack, risks, and the first acceptance tests.
 ```
 
 ---
@@ -146,18 +165,18 @@ Focus on a small, safe, buildable implementation using mock data. Identify the f
 After the plan is acceptable, use this prompt:
 
 ```text
-Implement Stage 1 and Stage 2 only.
+Implement the first Apps SDK MVP slice only.
 
-Create a minimal standalone Electron app prototype for ThoughtWeave. It should open as its own desktop window and display a polished static Research Review Layout using mock data.
+Create a ChatGPT App under `apps/chatgpt-app/`. It should expose an MCP `/mcp` endpoint, define the first ThoughtWeave reading-lens tools, and render a polished React widget inside ChatGPT.
 
-Do not add model calls yet.
+Do not add OpenAI API calls yet.
 Do not implement arbitrary generated UI.
-Do not integrate ChatGPT yet.
-Do not scrape or embed third-party pages.
+Do not scrape or inspect ChatGPT DOM.
+Do not automate ChatGPT prompts.
 
 After implementation, tell me:
 - files created or changed
-- how to run the app
+- how to run and connect the app
 - what is working
 - what is still mocked
 - the next smallest useful step
@@ -201,11 +220,13 @@ The project is about conversation-first adaptive UX.
 When implementing:
 
 - keep the first prototype visual and demonstrable
-- prioritise the researcher scenario
+- prioritise the Apps SDK Reading Lens scenario
 - make the state model richer than `messages[]`
 - preserve source relationships between excerpts, sections, and branches
-- render only trusted components
-- validate layout specs before rendering
+- render only trusted ThoughtWeave widget components/resources
+- validate tool inputs and outputs before rendering
 - avoid premature model integration
 - avoid hidden magic that changes UI unexpectedly
 - keep the user's current conversational path visible and recoverable
+- keep ChatGPT as the conversation surface for the Apps SDK MVP
+- keep ThoughtWeave as an additive companion widget, not a ChatGPT replacement

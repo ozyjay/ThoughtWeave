@@ -1,10 +1,21 @@
 # ThoughtWeave
 
-ThoughtWeave is a standalone desktop app prototype for adaptive interfaces around deep conversations.
+ThoughtWeave is a prototype for adaptive companion interfaces around deep conversations.
 
-It treats long-form conversations as evolving structures of thoughts, branches, contexts, questions, and reasoning paths. The first prototype uses mock data to demonstrate a Research Review Layout without model calls, ChatGPT integration, scraping, or arbitrary generated UI.
+It treats long-form conversations as evolving structures of thoughts, branches, contexts, questions, and reasoning paths. The current direction is a ChatGPT App built with the Apps SDK: ChatGPT remains the conversation surface, while ThoughtWeave renders an adaptive companion widget from user/model-provided context.
 
 ## Run
+
+Apps SDK MVP:
+
+```bash
+cd apps/chatgpt-app
+npm install
+npm run build
+npm run server
+```
+
+Legacy Electron prototype:
 
 ```bash
 npm install
@@ -13,6 +24,16 @@ npm run dev
 
 ## Verify
 
+Apps SDK MVP:
+
+```bash
+cd apps/chatgpt-app
+npm test
+npm run build
+```
+
+Legacy Electron prototype:
+
 ```bash
 npm test
 npm run compile
@@ -20,6 +41,14 @@ npm run build
 ```
 
 ## Current Prototype
+
+- ChatGPT App scaffold under `apps/chatgpt-app`
+- MCP server exposing `/mcp`
+- `create_reading_lens` and `render_reading_lens` tools
+- React widget for Reading Lens, Pinned Context, Open Questions, suggested panels, and next actions
+- No ChatGPT DOM scraping, prompt automation, transcript reconstruction, or client-side OpenAI API keys
+
+## Legacy Electron Prototype
 
 - Electron desktop shell with a secure preload bridge
 - React + Vite renderer

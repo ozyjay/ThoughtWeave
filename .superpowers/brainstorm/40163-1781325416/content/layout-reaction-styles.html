@@ -1,0 +1,63 @@
+<h2>How Should ThoughtWeave React to Layout Needs?</h2>
+<p class="subtitle">Three possible adaptation styles. Click the one that feels closest to the product you want.</p>
+
+<div class="cards">
+  <div class="card" data-choice="ambient" onclick="toggleSelect(this)">
+    <div class="card-image">
+      <div class="mockup" style="margin:0;">
+        <div class="mockup-header">A. Ambient Assists</div>
+        <div class="mockup-body">
+          <div class="placeholder" style="min-height:150px;">ChatGPT WebKit view</div>
+          <div style="margin-top:10px;display:flex;gap:8px;">
+            <button class="mock-button">Resume point</button>
+            <button class="mock-button">Pin note</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>A. Tiny overlays first</h3>
+      <p>ThoughtWeave adds lightweight affordances around the chat: pins, resume markers, branch hints, small side buttons.</p>
+    </div>
+  </div>
+
+  <div class="card" data-choice="panel" onclick="toggleSelect(this)">
+    <div class="card-image">
+      <div class="mockup" style="margin:0;">
+        <div class="mockup-header">B. Additive Companion Panels</div>
+        <div class="mockup-body" style="display:grid;grid-template-columns:1fr 130px;gap:10px;">
+          <div class="placeholder" style="min-height:150px;">ChatGPT WebKit view</div>
+          <div class="mock-sidebar">Reading Trail<br><br>Pinned Context</div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>B. Side panels when needed</h3>
+      <p>The chat remains primary. ThoughtWeave suggests a specific panel when the conversation creates a clear need.</p>
+    </div>
+  </div>
+
+  <div class="card" data-choice="workspace" onclick="toggleSelect(this)">
+    <div class="card-image">
+      <div class="mockup" style="margin:0;">
+        <div class="mockup-header">C. Workspace Mode</div>
+        <div class="mockup-body" style="display:grid;grid-template-columns:100px 1fr 100px;gap:8px;">
+          <div class="mock-sidebar">Map</div>
+          <div class="placeholder" style="min-height:150px;">Conversation</div>
+          <div class="mock-sidebar">Context</div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>C. Full layout modes</h3>
+      <p>The app eventually proposes a named workspace layout, like Research Review, Debugging, Writing, or Decision Review.</p>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <h3>My recommendation</h3>
+  <p>
+    Start with B as the core MVP: additive companion panels. Keep A for tiny cues, and treat C as a later escalation once the user trusts the system.
+  </p>
+</div>
